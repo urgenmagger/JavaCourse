@@ -15,14 +15,4 @@ public class Max {
      int result = first > second ? first : second;
      return result;
     }
-/**
- * @param first - firest.
- * @param second - second.
- *@return max number.
- */
-    public int max(int first, int second) {
-     int result = first > second ? first : second;
-     return result;
-    }
-
 }
