@@ -15,10 +15,13 @@ public class TriangleTest {
      */
     @Test
     public void triangleTest() {
-      Triangle triangle = new Triangle();
-      double result = triangle.area(15, 15, 15, 30, 30, 15);
-      double except = 112.5;
-      assertThat(result, closeTo(except, 0));
+      Point a = new Point(15, 15);
+      Point b = new Point(15, 30);
+      Point c = new Point(30, 15);
+      Triangle testArea = new Triangle(a, b, c);
+        double result = testArea.area();
+        double except = -112.5;
+        assertThat(result, closeTo(except, 0.01));
     }
 
 }

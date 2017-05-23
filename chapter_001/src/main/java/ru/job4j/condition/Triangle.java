@@ -33,14 +33,8 @@ public class Triangle {
 /**
  * Triangle method.
  * @return result formula.
- * @param ax for a.
- * @param ay for b.
- * @param bx for c.
- * @param by for a.
- * @param cx for b.
- * @param cy for c.
  */
-  public double area(ax, ay, bx, by, cx, cy) {
+  public double area() {
 //calculate the triangle area
     double ax = this.a.getX();
     double ay = this.a.getY();
@@ -49,8 +43,10 @@ public class Triangle {
     double cx = this.c.getX();
     double cy = this.c.getY();
     double result = (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by)) / 2;
-    if (result != 0) {
-    return result;
+    if (result == 0) {
+      return 0; //It is not a triangle or a degenerate triangle
+    } else {
+      return result;
     }
   }
 }
