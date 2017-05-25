@@ -20,7 +20,7 @@ public class TriangleTest {
       Point c = new Point(30, 15);
       Triangle testArea = new Triangle(a, b, c);
         double result = testArea.area();
-        double except = -112.5;
+        double except = 112.5;
         assertThat(result, closeTo(except, 0.01));
     }
 

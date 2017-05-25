@@ -42,12 +42,7 @@ public class Triangle {
     double by = this.b.getY();
     double cx = this.c.getX();
     double cy = this.c.getY();
-    double result = (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by)) / 2;
-    if (result == 0) {
-      return 0; //It is not a triangle or a degenerate triangle
-    } else {
-      return result;
-    }
+    return Math.abs((ax * (by - cy) + bx * (cy - ay) + cx * (ay - by))) / 2;
   }
 }
 
