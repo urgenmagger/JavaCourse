@@ -17,8 +17,8 @@ public class MaxTest {
     @Test
     public void ternal() {
      Max tern = new Max();
-        int tester = tern.max(5, 1);
-        int expected = 5;
+        int tester = tern.max(5, 1, 8);
+        int expected = 8;
         assertThat(tester, is(expected));
     }
 }
