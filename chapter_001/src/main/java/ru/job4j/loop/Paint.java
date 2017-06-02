@@ -12,7 +12,6 @@ public class Paint {
  */
   public String pyramid(int h) {
     StringBuilder sb = new StringBuilder();
-   // String newLine = System.getProperty("line.separator");
     int w = (h + h) - 1;
     for (int i = 1; i <= h; i++) {
       for (int j = 1; j <= w; j++) {
@@ -33,7 +32,6 @@ public class Paint {
              sb.append("^");
           }
       }
-          // sb.append(newLine);
            sb.append(System.getProperty("line.separator"));
     }
    return sb.toString();

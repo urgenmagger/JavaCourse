@@ -29,6 +29,10 @@ public class PaintTest {
     @Test
     public void whenPiramidWithHeightThreeThenStringWithThreeRows() {
        //напишите здесь тест, проверяющий формирование пирамиды для высоты 3.
+        Paint paint = new Paint();
+        String result = paint.pyramid(3);
+        String expected = String.format(" ^ %s^^^%s^^^^^", System.getProperty("line.separator"));
+        assertThat(result, is(expected));
     }
 }
 
