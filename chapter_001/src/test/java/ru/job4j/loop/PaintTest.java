@@ -19,7 +19,7 @@ public class PaintTest {
     public void whenPiramidWithHeightTwoThenStringWithTwoRows() {
         Paint paint = new Paint();
         String result = paint.pyramid(2);
-        String expected = String.format(" ^ %s^^^", System.getProperty("line.separator"));
+        String expected = String.format(" ^ %n^^^%n", System.getProperty("line.separator"));
         assertThat(result, is(expected));
     }
     /**
@@ -31,7 +31,7 @@ public class PaintTest {
        //напишите здесь тест, проверяющий формирование пирамиды для высоты 3.
         Paint paint = new Paint();
         String result = paint.pyramid(3);
-        String expected = String.format(" ^ %s^^^%s^^^^^", System.getProperty("line.separator"));
+        String expected = String.format("  ^  %n ^^^ %n^^^^^%n", System.getProperty("line.separator"));
         assertThat(result, is(expected));
     }
 }
