@@ -14,12 +14,14 @@ public class Substring {
   boolean contains(String origin, String sub) {
      char[] str = origin.toCharArray();
      char[] strsub = sub.toCharArray();
-     boolean result = true;
+     boolean result = false;
      for (int i = 0; i <= str.length - 1; i++) {
       if (strsub[0] == str[i]) {
         for (int j = 0; j <= strsub.length - 1; j++) {
-          if (strsub[j] != str[j + i]) {
-              result = false;
+          if (strsub[j] == str[j + i]) {
+              result = true;
+          } else {
+            result = false;
           }
         }
      }
