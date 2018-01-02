@@ -38,6 +38,9 @@ public class Item {
         this.description = description;
     }
 
+    public Item(String name, String description) {
+    }
+
     /**
      * @return description.
      */
