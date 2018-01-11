@@ -57,7 +57,7 @@ public class Tracker {
      *
      * @param id - id.
      */
-    public void delete(String id) {
+    public void deleteItem(String id) {
         for (int i = 0; i <= this.position; i++) {
             if (items[i] != null && items[i].getId().equals(id)) {
                 this.items[i] = null;

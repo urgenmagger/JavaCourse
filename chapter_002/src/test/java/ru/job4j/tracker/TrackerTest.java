@@ -71,7 +71,7 @@ public class TrackerTest {
         tracker.add(delItem);
         tracker.add(delItem1);
         tracker.add(delItem2);
-        tracker.delete(delItem2.getId());
+        tracker.deleteItem(delItem2.getId());
         Item[] expect = {delItem, delItem1};
         assertThat(tracker.findAll(), is(expect));
     }
