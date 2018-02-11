@@ -1,11 +1,56 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
+
+    private final PrintStream stdout = System.out;
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    String lineSeparator = System.getProperty("line.separator");
+
+    @Before
+    public void loadOutput() {
+        System.out.println("execute before method");
+        System.setOut(new PrintStream(this.out));
+    }
+
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+        System.out.println("execute after method");
+    }
+
+    private final String showMenu = new StringBuilder()
+            .append("<++++++++++++++>")
+            .append(lineSeparator)
+            .append("Меню.")
+            .append(lineSeparator)
+            .append("0. Добавить заявку")
+            .append(lineSeparator)
+            .append("1. Показать все заявки")
+            .append(lineSeparator)
+            .append("2. Редактирование")
+            .append(lineSeparator)
+            .append("3. Удаление")
+            .append(lineSeparator)
+            .append("4. Поиск по id")
+            .append(lineSeparator)
+            .append("5. Поиск по названию")
+            .append(lineSeparator)
+            .append("6. Выход:")
+            .append(lineSeparator)
+            .append("Выбрать: ")
+            .append(lineSeparator)
+            .toString();
+
 
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
@@ -43,5 +88,69 @@ public class StartUITest {
         Item[] except = {itemTestOne};
         assertThat(tracker.findAll(), is(except));
     }
-}
 
+    @Test
+    public void showAllItemTest() {
+        Tracker tracker = new Tracker();
+        Item itemTestTwo = tracker.add(new Item("testTwo name", "description"));
+        Input input = new StubInput(new String[]{"1", "6"});
+        new StartUI(input, tracker).init();
+        String result = new String(out.toByteArray());
+        String except = new StringBuilder()
+                .append(this.showMenu)
+                .append("------------ Все заявки--------------")
+                .append(lineSeparator)
+                .append("Имя заявки: " + itemTestTwo.getName())
+                .append(lineSeparator)
+                .append("Описание заявки: " + itemTestTwo.getDescription())
+                .append(lineSeparator)
+                .append(this.showMenu)
+                .toString();
+        assertThat(except, is(result));
+    }
+
+    @Test
+    public void findByIdItemTest() {
+        Tracker tracker = new Tracker();
+        Item itemTestOne = tracker.add(new Item("testOne name", "description"));
+        Input input = new StubInput(new String[]{"4", itemTestOne.getId(), "6"});
+        new StartUI(input, tracker).init();
+        String result = new String(out.toByteArray());
+        String except = new StringBuilder()
+                .append(this.showMenu)
+                .append("------------ Поиск заявки по id--------------")
+                .append(lineSeparator)
+                .append("Имя заявки: " + itemTestOne.getName())
+                .append(lineSeparator)
+                .append("Описание заявки: " + itemTestOne.getDescription())
+                .append(lineSeparator)
+                .append(this.showMenu)
+                .toString();
+        assertThat(except, is(result));
+    }
+
+    @Test
+    public void findByNameItemTest() {
+        Tracker tracker = new Tracker();
+        Item itemTestTwo = tracker.add(new Item("testTwo name", "description"));
+        Item itemTestOne = tracker.add(new Item("testOne name", "description"));
+        Input input = new StubInput(new String[]{"5", itemTestOne.getName(), "6"});
+        new StartUI(input, tracker).init();
+        String result = new String(out.toByteArray());
+        String except = new StringBuilder()
+                .append(this.showMenu)
+                .append("------------ Поиск заявки по имени --------------")
+                .append(lineSeparator)
+                .append("обнаруженные совпадения по имени: " + itemTestOne.getName())
+                .append(lineSeparator)
+                .append("описание заявки: " + itemTestOne.getDescription())
+                .append(lineSeparator)
+                .append("id заявки: " + itemTestOne.getId())
+                .append(lineSeparator)
+                .append("-----------")
+                .append(lineSeparator)
+                .append(this.showMenu)
+                .toString();
+        assertThat(except, is(result));
+    }
+}
