@@ -29,25 +29,21 @@ public class StartUITest {
     }
 
     private final String showMenu = new StringBuilder()
-            .append("<++++++++++++++>")
+            .append("Меню")
             .append(lineSeparator)
-            .append("Меню.")
+            .append("0.Добавить заявку")
             .append(lineSeparator)
-            .append("0. Добавить заявку")
+            .append("1.Показать все заявки")
             .append(lineSeparator)
-            .append("1. Показать все заявки")
+            .append("2.Редактирование")
             .append(lineSeparator)
-            .append("2. Редактирование")
+            .append("3.Удаление")
             .append(lineSeparator)
-            .append("3. Удаление")
+            .append("4.Поиск по id")
             .append(lineSeparator)
-            .append("4. Поиск по id")
+            .append("5.Поиск по названию")
             .append(lineSeparator)
-            .append("5. Поиск по названию")
-            .append(lineSeparator)
-            .append("6. Выход:")
-            .append(lineSeparator)
-            .append("Выбрать: ")
+            .append("6.Выход из программы")
             .append(lineSeparator)
             .toString();
 
@@ -71,11 +67,10 @@ public class StartUITest {
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item("test name", "description"));
         //создаём StubInput с последовательностью действий
-        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "newTest name", "desc", "6"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findById(item.getId()).getName(), is("test name"));
+        assertThat(tracker.findById(item.getId()).getName(), is("newTest name"));
     }
 
     @Test
@@ -83,7 +78,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item itemTestTwo = tracker.add(new Item("testTwo name", "description"));
         Item itemTestOne = tracker.add(new Item("testOne name", "description"));
-        Input input = new StubInput(new String[]{"3", itemTestTwo.getId(), "tet name", "desc", "6"});
+        Input input = new StubInput(new String[]{"3", itemTestTwo.getId(), "6"});
         new StartUI(input, tracker).init();
         Item[] except = {itemTestOne};
         assertThat(tracker.findAll(), is(except));
