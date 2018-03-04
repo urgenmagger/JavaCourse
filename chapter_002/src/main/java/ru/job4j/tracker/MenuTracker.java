@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 
 /**
- *outer class
+ * outer class
  */
 class Exit implements UserAction {
     private final Stop input;
@@ -44,9 +44,16 @@ public class MenuTracker {
         this.actions[this.position++] = this.new FindNameItem();
     }
 
+    public int[] rangeActions() {
+        int[] result = new int[actions.length];
+        for (int i = 1; i < result.length; i++) {
+            result[i] = i;
+        }
+        return result;
+    }
+
     public void add(UserAction action) {
         this.actions[this.position++] = action;
-
     }
 
     public void show() {
@@ -143,7 +150,7 @@ public class MenuTracker {
 
 
     /**
-     *inner static class
+     * inner static class
      */
     private static class ShowAllItems implements UserAction {
 
@@ -164,8 +171,9 @@ public class MenuTracker {
             return String.format("%s.%s", this.key(), "Показать все заявки");
         }
     }
+
     /**
-     *inner class
+     * inner class
      */
     private class EditItem implements UserAction {
         public int key() {

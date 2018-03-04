@@ -35,14 +35,12 @@ public class StartUI implements Stop {
         do {
             System.out.println("Меню");
             menu.show();
-            int key = Integer.valueOf(input.ask("Выбрать: "));
-            menu.select(key);
+            menu.select(input.ask("Выбрать: ", menu.rangeActions()));
         } while (this.exit);
     }
 
     public void stop() {
         this.exit = false;
-
     }
 
     /**
@@ -51,6 +49,6 @@ public class StartUI implements Stop {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
