@@ -4,24 +4,24 @@ package ru.job4j.tracker;
 /**
  * outer class
  */
-class Exit implements UserAction {
-    private final Stop input;
+class Exit extends BaseActions {
+    private final Stop stop;
 
-    Exit(Stop exit) {
-        this.input = exit;
+    public Exit(int key, String name, Stop stop) {
+        super(key, name);
+        this.stop = stop;
     }
 
-    public int key() {
-        return 6;
+    Exit(Stop exit) {
+        super(6, "Выход из программы");
+        this.stop = exit;
     }
 
     public void execute(Input input, Tracker tracker) {
-        this.input.stop();
+        this.stop.stop();
     }
 
-    public String info() {
-        return String.format("%s.%s", this.key(), "Выход из программы");
-    }
+
 }
 
 public class MenuTracker {
@@ -35,13 +35,14 @@ public class MenuTracker {
         this.tracker = tracker;
     }
 
+
     public void fillActions() {
-        this.actions[this.position++] = this.new AddItem();
-        this.actions[this.position++] = new MenuTracker.ShowAllItems();
-        this.actions[this.position++] = this.new EditItem();
-        this.actions[this.position++] = this.new DeleteItem();
-        this.actions[this.position++] = this.new FindIdItem();
-        this.actions[this.position++] = this.new FindNameItem();
+        this.actions[this.position++] = this.new AddItem(0, "Добавить заявку");
+        this.actions[this.position++] = new MenuTracker.ShowAllItems(1, "Показать все заявки");
+        this.actions[this.position++] = this.new EditItem(2, "Редактирование");
+        this.actions[this.position++] = this.new DeleteItem(3, "Удаление");
+        this.actions[this.position++] = this.new FindIdItem(4, "Поиск по id");
+        this.actions[this.position++] = this.new FindNameItem(5, "Поиск по названию");
     }
 
     public int[] rangeActions() {
@@ -51,6 +52,7 @@ public class MenuTracker {
         }
         return result;
     }
+
 
     public void add(UserAction action) {
         this.actions[this.position++] = action;
@@ -69,11 +71,11 @@ public class MenuTracker {
     }
 
 
-    private class AddItem implements UserAction {
-
-        public int key() {
-            return 0;
+    private class AddItem extends BaseActions {
+        public AddItem(int key, String name) {
+            super(key, name);
         }
+
 
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Добавление новой заявки --------------");
@@ -84,15 +86,11 @@ public class MenuTracker {
             System.out.println("------------ Новая заявка с id : " + item.getId() + "-----------");
         }
 
-        public String info() {
-            return String.format("%s.%s", this.key(), "Добавить заявку");
-        }
     }
 
-    private class DeleteItem implements UserAction {
-
-        public int key() {
-            return 3;
+    private class DeleteItem extends BaseActions {
+        public DeleteItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -102,16 +100,13 @@ public class MenuTracker {
             System.out.println("------Заявка с id " + id + " удалена");
         }
 
-        public String info() {
-            return String.format("%s.%s", this.key(), "Удаление");
-        }
     }
 
-    private class FindIdItem implements UserAction {
-
-        public int key() {
-            return 4;
+    private class FindIdItem extends BaseActions {
+        public FindIdItem(int key, String name) {
+            super(key, name);
         }
+
 
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Поиск заявки по id--------------");
@@ -120,15 +115,12 @@ public class MenuTracker {
             System.out.println("Описание заявки: " + tracker.findById(findId).getDescription());
         }
 
-        public String info() {
-            return String.format("%s.%s", this.key(), "Поиск по id");
-        }
     }
 
-    private class FindNameItem implements UserAction {
+    private class FindNameItem extends BaseActions {
 
-        public int key() {
-            return 5;
+        public FindNameItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -143,20 +135,17 @@ public class MenuTracker {
             }
         }
 
-        public String info() {
-            return String.format("%s.%s", this.key(), "Поиск по названию");
-        }
     }
 
 
     /**
      * inner static class
      */
-    private static class ShowAllItems implements UserAction {
+    private static class ShowAllItems extends BaseActions {
 
 
-        public int key() {
-            return 1;
+        public ShowAllItems(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -166,18 +155,14 @@ public class MenuTracker {
                 System.out.println(String.format("Описание заявки: %s", item.getDescription()));
             }
         }
-
-        public String info() {
-            return String.format("%s.%s", this.key(), "Показать все заявки");
-        }
     }
 
     /**
      * inner class
      */
-    private class EditItem implements UserAction {
-        public int key() {
-            return 2;
+    private class EditItem extends BaseActions {
+        public EditItem(int key, String name) {
+            super(key, name);
         }
 
         public void execute(Input input, Tracker tracker) {
@@ -189,10 +174,6 @@ public class MenuTracker {
             tracker.replace(id, item);
             System.out.println("------------  Заявка с id : " + item.getId() + " отредатирована");
 
-        }
-
-        public String info() {
-            return String.format("%s.%s", this.key(), "Редактирование");
         }
     }
 }
