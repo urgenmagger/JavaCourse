@@ -44,7 +44,7 @@ public class BishopTest {
         Cell[] result = figure.way(source, dist);
         assertThat(Arrays.toString(result), is(Arrays.toString(expected)));
     }
-    // test moving left -> up for 3 cell;
+    // test moving left -> down for 3 cell;
     @Test
     public void bishopWayTestLeftDown() {
         Cell source = new Cell(3, 3);
@@ -57,7 +57,7 @@ public class BishopTest {
         Cell[] result = figure.way(source, dist);
         assertThat(Arrays.toString(result), is(Arrays.toString(expected)));
     }
-    // test moving left -> up for 3 cell;
+    // test moving right -> down for 3 cell;
     @Test
     public void bishopWayTestRightDown() {
         Cell source = new Cell(5, 5);
@@ -70,17 +70,6 @@ public class BishopTest {
         Cell[] result = figure.way(source, dist);
         assertThat(Arrays.toString(result), is(Arrays.toString(expected)));
     }
-//    @Test
-//    public void moveImpossible() throws ImpossibleMoveException {
-//        Cell source = new Cell(5, 5);
-//        Cell dist = new Cell(7, 7);
-//        Figure figure = new Bishop(source);
-//        Cell[] expected = new Cell[3];
-//        expected[0] = new Cell(5, 5);
-//        expected[1] = new Cell(7, 6);
-//        expected[2] = new Cell(7, 7);
-//        Cell[] result = figure.way(source, dist);
-//        assertThat(Arrays.toString(result), is(Arrays.toString(expected)));
-//    }
+
 
 }

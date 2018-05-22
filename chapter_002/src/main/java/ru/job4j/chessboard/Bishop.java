@@ -6,6 +6,12 @@ public class Bishop extends Figure {
         super(position);
     }
 
+    /**
+     * @param source
+     * @param dest
+     * @return path step
+     * @throws ImpossibleMoveException
+     */
     @Override
     Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         int x1 = source.getX();
@@ -14,28 +20,20 @@ public class Bishop extends Figure {
         int y2 = dest.getY();
         int lengthWay = Math.abs(x1 - x2);
         Cell[] cells = new Cell[lengthWay + 1];
-        int stepX = 1, stepY = 1;
-
         if (Math.abs(x1 - x2) != Math.abs(y1 - y2) || (x2 <= 0 || x2 > 8) || (y2 <= 0 || y2 > 8)) {
-            new ImpossibleMoveException("impossible step");
+            throw new ImpossibleMoveException("movement impossible");
         } else {
             for (int i = 0; i != lengthWay + 1; i++) {
                 cells[i] = new Cell(x1, y1);
-                if (x1 > x2 && y1 > y2) {
-                    x1 -= stepX;
-                    y1 -= stepY;
+                if (x2 > x1) {
+                    x1++;
+                } else {
+                    x1--;
                 }
-                if (x1 > x2 && y1 < y2) {
-                    x1 -= stepX;
-                    y1 += stepY;
-                }
-                if (x1 < x2 && y1 > y2) {
-                    x1 += stepX;
-                    y1 -= stepY;
-                }
-                if (x1 < x2 && y1 < y2) {
-                    x1 += stepX;
-                    y1 += stepY;
+                if (y2 > y1) {
+                    y1++;
+                } else {
+                    y1--;
                 }
             }
         }

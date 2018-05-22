@@ -15,30 +15,26 @@ public class Board {
         for (Figure figure : figures) {
             if (isOccupiedBy(source)) {
                 Cell[] way = figure.way(source, dest);
-                try {
-                    figure.way(source, dest);
-                } catch (ImpossibleMoveException e) {
-                    throw new ImpossibleMoveException(" так ходить нельзя");
-                }
                 for (Cell cell : way) {
-                    if (cell != null && !isOccupiedBy(cell)) {
-                        throw new OccupiedWayException("занято");
+                    if (cell != null && isOccupiedBy(cell)) {
+                        throw new OccupiedWayException("path is occupied");
                     }
                 }
+                result = true;
+                figure.copy(dest);
+                break;
             } else {
-                throw new FigureNotFoundException("клетка пустая");
+                throw new FigureNotFoundException("do not figure");
             }
-            figure.copy(dest);
-            return true;
         }
         return result;
-
     }
+
 
     public boolean isOccupiedBy(Cell cell) {
         boolean result = false;
         for (Figure figure : figures) {
-            if (figure != null && figure.position.equals(cell)) {
+            if (figure != null && figure.position.getX() == cell.getX() && figure.position.getY() == cell.getY()) {
                 return true;
             }
         }
