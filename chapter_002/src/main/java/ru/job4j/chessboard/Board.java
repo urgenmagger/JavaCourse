@@ -2,7 +2,7 @@ package ru.job4j.chessboard;
 
 public class Board {
     Figure[] figures = new Figure[32];
-    static int figuresCounter = 0;
+    private int figuresCounter = 0;
 
 
     public void add(Figure figure) {

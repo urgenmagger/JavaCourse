@@ -7,7 +7,6 @@ public class BoardTest {
     @Test(expected = FigureNotFoundException.class)
     public void whenNotFigureInThisCell() {
         Board board = new Board();
-        Board.figuresCounter = 0;
         Cell source = new Cell(2, 2);
         Cell dest = new Cell(2, 1);
         Cell sourceEmpty = new Cell(2, 1);
@@ -27,7 +26,6 @@ public class BoardTest {
     @Test(expected = OccupiedWayException.class)
     public void whenOccupiedMiddleCell() {
         Board board = new Board();
-        Board.figuresCounter = 0;
         Cell source = new Cell(1, 1);
         Cell dest = new Cell(7, 7);
         Cell sourceOne = new Cell(5, 5);
@@ -41,7 +39,6 @@ public class BoardTest {
     @Test(expected = OccupiedWayException.class)
     public void whenOccupiedDestCell() {
         Board board = new Board();
-        Board.figuresCounter = 0;
         Cell source = new Cell(1, 1);
         Cell dest = new Cell(7, 7);
         Cell sourceOne = new Cell(7, 7);
@@ -55,7 +52,6 @@ public class BoardTest {
     @Test(expected = ImpossibleMoveException.class)
     public void whenMoveImpossible() {
         Board board = new Board();
-        Board.figuresCounter = 0;
         Cell source = new Cell(2, 2);
         Cell dest = new Cell(2, 1);
         Figure bishop = new Bishop(source);
