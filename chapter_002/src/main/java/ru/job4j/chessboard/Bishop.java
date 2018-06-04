@@ -20,24 +20,15 @@ public class Bishop extends Figure {
         int y2 = dest.getY();
         int lengthWay = Math.abs(x1 - x2);
         Cell[] cells = new Cell[lengthWay + 1];
-        if (Math.abs(x1 - x2) != Math.abs(y1 - y2) || (x2 <= 0 || x2 > 8) || (y2 <= 0 || y2 > 8)) {
-            throw new ImpossibleMoveException("movement impossible");
-        } else {
+        if (Math.abs(x1 - x2) == Math.abs(y1 - y2) || (x2 <= 0 || x2 > 8) || (y2 <= 0 || y2 > 8)) {
             for (int i = 0; i != lengthWay + 1; i++) {
                 cells[i] = new Cell(x1, y1);
-                if (x2 > x1) {
-                    x1++;
-                } else {
-                    x1--;
-                }
-                if (y2 > y1) {
-                    y1++;
-                } else {
-                    y1--;
-                }
+                int dx = (x2 > x1) ? x1++ : x1--;
+                int dy = (y2 > y1) ? y1++ : y1--;
             }
+        } else {
+            throw new ImpossibleMoveException("movement impossible");
         }
-
         return cells;
     }
 

@@ -35,11 +35,14 @@ public class Board {
         boolean result = false;
         for (Figure figure : figures) {
             if (figure != null && figure.position.getX() == cell.getX() && figure.position.getY() == cell.getY()) {
-                return true;
+                result = true;
+                break;
             }
         }
         return result;
     }
+
+
 
     public Figure[] getFigures() {
         return figures;
