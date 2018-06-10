@@ -13,19 +13,18 @@ public class Board {
 
         boolean result = false;
         for (Figure figure : figures) {
-            if (isOccupiedBy(source)) {
-                Cell[] way = figure.way(source, dest);
-                for (Cell cell : way) {
-                    if (cell != null && isOccupiedBy(cell)) {
-                        throw new OccupiedWayException("path is occupied");
-                    }
-                }
-                result = true;
-                figure.copy(dest);
-                break;
-            } else {
-                throw new FigureNotFoundException("do not figure");
+            if (!isOccupiedBy(source)) {
+                throw new FigureNotFoundException("figure is missing");
             }
+            Cell[] way = figure.way(source, dest);
+            for (Cell cell : way) {
+                if (cell != null && isOccupiedBy(cell)) {
+                    throw new OccupiedWayException("path is occupied");
+                }
+            }
+            result = true;
+            figure.copy(dest);
+            break;
         }
         return result;
     }
@@ -41,7 +40,6 @@ public class Board {
         }
         return result;
     }
-
 
 
     public Figure[] getFigures() {
