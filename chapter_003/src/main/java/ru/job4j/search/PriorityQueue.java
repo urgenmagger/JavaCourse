@@ -7,8 +7,8 @@ public class PriorityQueue {
 
     /**
      * Метод должен вставлять в нужную позицию элемент.
-     * Позиция определять по полю приоритет.
-     * Для вставик использовать add(int index, E value)
+     * Позиция определяет по полю приоритет.
+     * Для вставок использовать add(int index, E value)
      *
      * @param task задача
      */
@@ -16,14 +16,15 @@ public class PriorityQueue {
         //TODO добавить вставку в связанный список.
         if (tasks.isEmpty()) {
             tasks.add(0, task);
-        }
-        for (int i = 0; i < tasks.size() - 1; i++) {
-            if (task.getPriority() < tasks.get(i).getPriority()) {
-                tasks.add(i, task);
-                break;
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                if (task.getPriority() < tasks.get(i).getPriority()) {
+                    tasks.add(i, task);
+                    return;
+                }
             }
+            tasks.add(task);
         }
-        tasks.add(task);
     }
 
     public Task take() {
