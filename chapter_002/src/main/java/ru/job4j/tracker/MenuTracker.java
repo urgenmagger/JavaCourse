@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * outer class
  */
@@ -27,8 +30,7 @@ class Exit extends BaseActions {
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
-    private UserAction[] actions = new UserAction[7];
-    private int position = 0;
+    private List<UserAction> actions = new ArrayList<>(7);
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -37,16 +39,16 @@ public class MenuTracker {
 
 
     public void fillActions() {
-        this.actions[this.position++] = this.new AddItem(0, "Добавить заявку");
-        this.actions[this.position++] = new MenuTracker.ShowAllItems(1, "Показать все заявки");
-        this.actions[this.position++] = this.new EditItem(2, "Редактирование");
-        this.actions[this.position++] = this.new DeleteItem(3, "Удаление");
-        this.actions[this.position++] = this.new FindIdItem(4, "Поиск по id");
-        this.actions[this.position++] = this.new FindNameItem(5, "Поиск по названию");
+        this.actions.add(this.new AddItem(0, "Добавить заявку"));
+        this.actions.add(new MenuTracker.ShowAllItems(1, "Показать все заявки"));
+        this.actions.add(this.new EditItem(2, "Редактирование"));
+        this.actions.add(this.new DeleteItem(3, "Удаление"));
+        this.actions.add(this.new FindIdItem(4, "Поиск по id"));
+        this.actions.add(this.new FindNameItem(5, "Поиск по названию"));
     }
 
     public int[] rangeActions() {
-        int[] result = new int[actions.length];
+        int[] result = new int[actions.size()];
         for (int i = 1; i < result.length; i++) {
             result[i] = i;
         }
@@ -55,7 +57,7 @@ public class MenuTracker {
 
 
     public void add(UserAction action) {
-        this.actions[this.position++] = action;
+        this.actions.add(action);
     }
 
     public void show() {
@@ -67,7 +69,7 @@ public class MenuTracker {
     }
 
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
 
@@ -126,7 +128,7 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Поиск заявки по имени --------------");
             String findName = input.ask("Введите имя заявки: ");
-            Item[] result = tracker.findByName(findName);
+            List<Item> result = tracker.findByName(findName);
             for (Item item : result) {
                 System.out.println("обнаруженные совпадения по имени: " + item.getName());
                 System.out.println("описание заявки: " + item.getDescription());

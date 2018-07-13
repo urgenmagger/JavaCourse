@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -57,7 +59,7 @@ public class StartUITest {
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
     @Test
@@ -80,8 +82,9 @@ public class StartUITest {
         Item itemTestOne = tracker.add(new Item("testOne name", "description"));
         Input input = new StubInput(new String[]{"3", itemTestTwo.getId(), "6"});
         new StartUI(input, tracker).init();
-        Item[] except = {itemTestOne};
-        assertThat(tracker.findAll(), is(except));
+        List<Item> list = new ArrayList<>();
+        list.add(itemTestOne);
+        assertThat(tracker.findAll(), is(list));
     }
 
     @Test
