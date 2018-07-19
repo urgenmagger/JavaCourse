@@ -19,6 +19,10 @@ public class User implements Comparable<User> {
         return age;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "name='" + name + '\'' + ", age=" + age + '}';
+    }
 
     @Override
     public int hashCode() {
