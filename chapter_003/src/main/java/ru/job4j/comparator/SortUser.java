@@ -21,11 +21,11 @@ public class SortUser {
         list.sort(new Comparator<User>() {
             @Override
             public int compare(User nameOne, User nameTwo) {
-                int firstSort = nameOne.getName().compareTo(nameTwo.getName());
-                if (firstSort != 0) {
-                    return firstSort;
+                int result = nameOne.getName().compareTo(nameTwo.getName());
+                if (result == 0) {
+                    result = Integer.compare(nameOne.getAge(), nameTwo.getAge());
                 }
-                return Integer.compare(nameOne.getAge(), nameTwo.getAge());
+                return result;
             }
         });
         return list;
