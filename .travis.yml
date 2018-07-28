@@ -11,6 +11,6 @@ after_success:
 # Отправлять уведомление на почтуmailto:youremail@smtp.ru(Изменить на свою) если сборка упала
 notifications:
   email:
-    recipients: evgen.magger@gmail.com
+    recipients: - evgen.magger@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
