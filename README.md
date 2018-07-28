@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/urgenmagger/JavaCourse.svg?branch=master)](https://travis-ci.org/urgenmagger/JavaCourse)
+[![codecov](https://codecov.io/gh/urgenmagger/JavaCourse/branch/master/graph/badge.svg)](https://codecov.io/gh/urgenmagger/JavaCourse)
 # JavaCourse
 Этот репозиторий - курс по Java, который основан на проектах и задачах ресурса http://job4j.ru/.
 
