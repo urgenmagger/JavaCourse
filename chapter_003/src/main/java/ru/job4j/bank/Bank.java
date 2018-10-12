@@ -19,7 +19,7 @@ public class Bank {
     public void addAccountToUser(String passport, Account account) {
         if (passport != null && account != null) {
             for (User user : userMap.keySet()) {
-                if (user.getPassport().equals(passport)) {
+                if (user.getPassport().equals(passport) && !getUserAccounts(passport).contains(account)) {
                     userMap.get(user).add(account);
                     break;
                 }

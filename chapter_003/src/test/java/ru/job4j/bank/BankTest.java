@@ -45,6 +45,22 @@ public class BankTest {
     }
 
     @Test
+    public void ifDuplicateAccount() {
+        Bank bank = new Bank();
+        User user = new User("John", "1");
+        Account accountFirst = new Account(12.5, "1");
+        Account accountDouble = new Account(200086.5, "2");
+        bank.addUser(user);
+        bank.addAccountToUser("1", accountFirst);
+        bank.addAccountToUser("1", accountFirst);
+        bank.addAccountToUser("1", accountDouble);
+        bank.addAccountToUser("1", accountDouble);
+        List<Account> result = bank.getUserAccounts("1");
+        assertThat(result.size(), is(2));
+
+    }
+
+    @Test
     public void whenDeleteUserAccounts() {
         Bank bank = new Bank();
         User user = new User("John", "1");
