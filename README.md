@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/urgenmagger/JavaCourse.svg?branch=master)](https://travis-ci.org/urgenmagger/JavaCourse)
 [![codecov](https://codecov.io/gh/urgenmagger/JavaCourse/branch/master/graph/badge.svg)](https://codecov.io/gh/urgenmagger/JavaCourse)
 # JavaCourse
-Этот репозиторий - курс по Java, который основан на проектах и задачах ресурса http://job4j.ru/.
+Этот репозиторий - курс по Java, который основан на проектах и задачах ресурса [Job4j](http://job4j.ru/).
 
 Уровень обучения стажер/trainee разбит на три части. В первой части демонстрируются  разные способы решения задач с помощью алгоритмов (сортировка пузырьком, вращение матрицы, сортировка строк), структура:
 
@@ -71,3 +71,36 @@
  ```
 Инструменты - Maven, JUnit, Git. Эта часть сделана в среде разработки IntelliJ IDEA (плагин IdeaVIM).
 
+Третья часть - Collections Framework  
+Структура
+```
+├── bank
+│   ├── Account.java
+│   ├── Bank.java
+│   └── User.java
+├── comparator
+│   ├── ListCompare.java
+│   ├── SortUser.java
+│   └── User.java
+├── departament
+│   └── Department.java
+├── list
+│   ├── ConvertList2Array.java
+│   └── ConvertMatrix2List.java
+├── map
+│   ├── UserConvert.java
+│   └── User.java
+├── package-info.java
+├── phonebook
+│   ├── Person.java
+│   └── PhoneDictionary.java
+└── search
+    ├── PriorityQueue.java
+    └── Task.java
+```
+Применение на практике различных структур данных:  
+* ArrayList
+* HashMap 
+* LinkedList   
+
+Рефакторинг приложения Tracker(из Array в ArrayList).  
