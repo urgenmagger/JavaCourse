@@ -82,8 +82,6 @@
 │   ├── ListCompare.java
 │   ├── SortUser.java
 │   └── User.java
-├── departament
-│   └── Department.java
 ├── list
 │   ├── ConvertList2Array.java
 │   └── ConvertMatrix2List.java
@@ -100,7 +98,7 @@
 ```
 Применение на практике различных структур данных:  
 * ArrayList
-* HashMap 
 * LinkedList   
+* HashMap 
 
 Рефакторинг приложения Tracker(из Array в ArrayList).  
