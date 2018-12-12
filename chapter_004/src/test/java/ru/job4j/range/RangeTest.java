@@ -1,4 +1,5 @@
 package ru.job4j.range;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,38 +12,40 @@ public class RangeTest {
     @Test
     public void linearTest() {
         Range range = new Range();
-        List<Double> actual = new ArrayList<>();
-        actual.add(5.0);
-        actual.add(7.0);
-        actual.add(9.0);
-        actual.add(11.0);
+        List<Double> result = new ArrayList<>();
+        result.add(1.0);
+        result.add(2.0);
+        result.add(3.0);
+        result.add(4.0);
         List<Double> expected;
-        expected = range.linear(1, 4, 2, 3);
-        assertThat(actual, is(expected));
+        expected = range.linear(1, 4);
+        assertThat(result, is(expected));
     }
+
     @Test
     public void quadraticTest() {
         Range range = new Range();
-        List<Double> actual = new ArrayList<>();
-        actual.add(7.0);
-        actual.add(15.0);
-        actual.add(27.0);
-        actual.add(43.0);
+        List<Double> result = new ArrayList<>();
+        result.add(1.0);
+        result.add(4.0);
+        result.add(9.0);
+        result.add(16.0);
         List<Double> expected;
-        expected = range.quadratic(1, 4, 2, 2, 3);
-        assertThat(actual, is(expected));
+        expected = range.quadratic(1, 4);
+        assertThat(result, is(expected));
     }
+
     @Test
     public void logarithmTest() {
         Range range = new Range();
-        List<Double> actual = new ArrayList<>();
-        actual.add(Math.log(1.0));
-        actual.add(Math.log(2.0));
-        actual.add(Math.log(3.0));
-        actual.add(Math.log(4.0));
+        List<Double> result = new ArrayList<>();
+        result.add(Math.log(1.0));
+        result.add(Math.log(2.0));
+        result.add(Math.log(3.0));
+        result.add(Math.log(4.0));
         List<Double> expected;
         expected = range.logarithm(1, 4);
-        assertThat(actual, is(expected));
+        assertThat(result, is(expected));
     }
 
 }
