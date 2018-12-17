@@ -12,40 +12,39 @@ public class RangeTest {
     @Test
     public void linearTest() {
         Range range = new Range();
-        List<Double> result = new ArrayList<>();
-        result.add(1.0);
-        result.add(2.0);
-        result.add(3.0);
-        result.add(4.0);
-        List<Double> expected;
-        expected = range.linear(1, 4);
-        assertThat(result, is(expected));
+        List<Double> expected = new ArrayList<>();
+        expected.add(1.0);
+        expected.add(2.0);
+        expected.add(3.0);
+        expected.add(4.0);
+        List<Double> result;
+        result = range.diapason(1, 4, x -> x);
+        assertThat(expected, is(result));
     }
 
     @Test
     public void quadraticTest() {
         Range range = new Range();
-        List<Double> result = new ArrayList<>();
-        result.add(1.0);
-        result.add(4.0);
-        result.add(9.0);
-        result.add(16.0);
-        List<Double> expected;
-        expected = range.quadratic(1, 4);
-        assertThat(result, is(expected));
+        List<Double> expected = new ArrayList<>();
+        expected.add(1.0);
+        expected.add(4.0);
+        expected.add(9.0);
+        expected.add(16.0);
+        List<Double> result;
+        result = range.diapason(1, 4, x -> x * x);
+        assertThat(expected, is(result));
     }
 
     @Test
     public void logarithmTest() {
         Range range = new Range();
-        List<Double> result = new ArrayList<>();
-        result.add(Math.log(1.0));
-        result.add(Math.log(2.0));
-        result.add(Math.log(3.0));
-        result.add(Math.log(4.0));
-        List<Double> expected;
-        expected = range.logarithm(1, 4);
-        assertThat(result, is(expected));
+        List<Double> expected = new ArrayList<>();
+        expected.add(Math.log(1.0));
+        expected.add(Math.log(2.0));
+        expected.add(Math.log(3.0));
+        expected.add(Math.log(4.0));
+        List<Double> result;
+        result = range.diapason(1, 4, Math::log);
+        assertThat(expected, is(result));
     }
-
 }

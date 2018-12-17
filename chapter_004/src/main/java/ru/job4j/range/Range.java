@@ -14,17 +14,4 @@ public class Range {
         }
         return result;
     }
-
-    List<Double> linear(int start, int end) {
-        return diapason(start, end, (n) -> n);
-    }
-
-    List<Double> quadratic(int start, int end) {
-        return diapason(start, end, (n) -> Math.pow(n, 2));
-    }
-
-    List<Double> logarithm(int start, int end) {
-        return diapason(start, end, (n) -> Math.log(n));
-    }
-
 }
