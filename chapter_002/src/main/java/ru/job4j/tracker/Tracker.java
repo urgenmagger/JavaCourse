@@ -35,20 +35,25 @@ public class Tracker {
 
     public Item add(Item items) {
         items.setId(generateId());
-        this.items.add(position++, items);
+        this.items.add(items);
+        position++;
         return items;
     }
 
     /**
      * method replace items.
+     * 02.08.2018 рефакторинг, добавление метода int indexOf(Object obj), без него метод
+     * replace не работал нa нескольких заявках при запуске tracker.jar.
      *
      * @param item - items.
      * @param id   - id.
      */
     public void replace(String id, Item item) {
-        for (int i = 0; i < items.size(); i++) {
-            if (item != null && item.getId().equals(id)) {
-                items.set(i, item);
+        for (Item task : items) {
+            if (task != null && task.getId().equals(id)) {
+                //возвращаю первое вхождение методом int indexOf(Object obj);
+                this.items.set(this.items.indexOf(task), item);
+                break;
             }
         }
     }
@@ -73,9 +78,9 @@ public class Tracker {
      */
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>(this.position);
-        for (int i = 0; i < this.position; i++) {
-            if (items.get(i) != null && items.get(i).getName().equals(key)) {
-                result.add(items.get(i));
+        for (Item item : items) {
+            if (item.getName().equals(key)) {
+                result.add(item);
             }
         }
         return result;
@@ -112,6 +117,7 @@ public class Tracker {
 
     public List<Item> findAll() {
         List<Item> result = new ArrayList<>(position);
+        ((ArrayList<Item>) result).trimToSize();
         for (Item i : items) {
             result.add(i);
         }

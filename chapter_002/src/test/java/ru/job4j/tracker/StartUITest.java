@@ -8,15 +8,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
 
-    private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
     String lineSeparator = System.getProperty("line.separator");
+    //    private final PrintStream stdout = System.out;
+    private final Consumer<String> output = new Consumer<String>() {
+        private final PrintStream stdout = new PrintStream(out);
+
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+    };
 
     @Before
     public void loadOutput() {
@@ -26,7 +35,7 @@ public class StartUITest {
 
     @After
     public void backOutput() {
-        System.setOut(this.stdout);
+//        System.setOut(this.stdout);
         System.out.println("execute after method");
     }
 
@@ -57,7 +66,7 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
@@ -71,7 +80,7 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"2", item.getId(), "newTest name", "desc", "6"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(tracker.findById(item.getId()).getName(), is("newTest name"));
     }
 
@@ -81,7 +90,7 @@ public class StartUITest {
         Item itemTestTwo = tracker.add(new Item("testTwo name", "description"));
         Item itemTestOne = tracker.add(new Item("testOne name", "description"));
         Input input = new StubInput(new String[]{"3", itemTestTwo.getId(), "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         List<Item> list = new ArrayList<>();
         list.add(itemTestOne);
         assertThat(tracker.findAll(), is(list));
@@ -92,7 +101,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item itemTestTwo = tracker.add(new Item("testTwo name", "description"));
         Input input = new StubInput(new String[]{"1", "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         String result = new String(out.toByteArray());
         String except = new StringBuilder()
                 .append(this.showMenu)
@@ -114,7 +123,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item itemTestOne = tracker.add(new Item("testOne name", "description"));
         Input input = new StubInput(new String[]{"4", itemTestOne.getId(), "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         String result = new String(out.toByteArray());
         String except = new StringBuilder()
                 .append(this.showMenu)
@@ -137,7 +146,7 @@ public class StartUITest {
         Item itemTestTwo = tracker.add(new Item("testTwo name", "description"));
         Item itemTestOne = tracker.add(new Item("testOne name", "description"));
         Input input = new StubInput(new String[]{"5", itemTestOne.getName(), "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         String result = new String(out.toByteArray());
         String except = new StringBuilder()
                 .append(this.showMenu)
